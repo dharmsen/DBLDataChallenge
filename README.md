@@ -5,4 +5,4 @@
 this script finds all filenames, reformats the epoch to human date, saves them to dates_string.txt
 
 ## dates_string.txt
-(Lourens) Result from unpack.py
+(Lourens) Result from dates_string.py
