@@ -6,3 +6,7 @@ this script finds all filenames, reformats the epoch to human date, saves them t
 
 ## dates_string.txt
 (Lourens) Result from dates_string.py
+
+## unpacking_and_loading.py
+Useful functions for extracting zip files and for loading JSON files.
+The load functions will store the JSON file as a Python Generator.
