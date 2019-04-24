@@ -3,6 +3,7 @@
 ## dates_string.py
 (Lourens) Noted that all filenames had a large integer, suspected these are epochs,
 this script finds all filenames, reformats the epoch to human date, saves them to dates_string.txt
+Additionally, has a method that returns the filenames of the files in the first 31 days.
 
 ## dates_string.txt
 (Lourens) Result from dates_string.py
