@@ -15,7 +15,7 @@ for item in os.listdir(DATA_FILEPATH):
     dates.append(datetime.datetime.fromtimestamp(epoch))
     dates_string.append(datetime.datetime.fromtimestamp(epoch).strftime('%Y-%m-%d'))
 
-with open('dates_string.csv', 'w', encoding='utf8') as output:
+with open('dates_string.csv', 'w', encoding='utf8', newline="") as output:
     writer = csv.writer(output, delimiter=',')
     for row in zip(file_names, dates, dates_string):
         writer.writerow(row)
