@@ -50,5 +50,5 @@ class Reader(object):
 
 if __name__ == '__main__':
     #unzip('airlines_complete/airlines-1472662091753.json.zip')
-	#unzip_all('airlines_complete')
+    #unzip_all('airlines_complete')
     pass
