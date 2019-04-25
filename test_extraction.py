@@ -1,4 +1,5 @@
 from conversation_data_extractor import conversation_extractor
+from create_table import SaveDataFrameAsDB, LoadDatabaseAsDF
 
 if __name__ == '__main__':
     extractor = conversation_extractor('test_file.json', features=['id', 'text',
@@ -9,3 +10,13 @@ if __name__ == '__main__':
     dataframe = extractor.make_dataframe()
     print(dataframe.head(2))
     print(f'Shape: {dataframe.shape}')
+    print('\n')
+
+    print('dumping dataframe in database test_file.db')
+    SaveDataFrameAsDB(dataframe, filename='test_file.db')
+
+    print('\n')
+    print('loading dataframe again as sanitycheck')
+    df2 = LoadDatabaseAsDF('test_file.db')
+    print(df2.head(2))
+    print(f'Shape: {df2.shape}')

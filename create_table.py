@@ -5,7 +5,7 @@ import sqlite3 #To write database
 def SaveDataFrameAsDB(df, filename='maintable.db'):
     print('saving dataframe to ' + filename)
     cxn = sqlite3.connect(filename)
-    df.to_sql("tweets", cxn, index=True, if_exists='replace')
+    df.to_sql("tweets", cxn, index=False, if_exists='replace')
 
     return 'table.db'
 
