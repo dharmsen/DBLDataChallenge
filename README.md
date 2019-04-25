@@ -2,14 +2,14 @@
 
 ## WORKING WITH test_file.db
 test_file.db is one json extracted. If you work in this directory, this is the code you have to add to get the database in a pandas dataframe, with which you can do whatever you want.
-'''
+```
 from DataBaseInterface import LoadDatabaseAsDF
 
 dataframe = LoadDatabaseAsDF('test_file.db')
-'''
+```
 
 ## test_extraction.py
-script that puts test_file.json into a database. 
+script that puts test_file.json into a database.
 
 ## dates_string.py
 (Lourens) Noted that all filenames had a large integer, suspected these are epochs,
