@@ -2,10 +2,13 @@ import os
 import json
 from zipfile import ZipFile
 
+DIRECTORY = "C://Users//20181884//Documents//Y1Q4//DBL"
+
+
 def json_readr(file):
     '''
     Iterates over lines and
-    creates a Python generator object 
+    creates a Python generator object
     out of a JSON file
     '''
     for line in open(file, mode='r'):
@@ -49,6 +52,3 @@ class Reader(object):
             return ''
 
 if __name__ == '__main__':
-    #unzip('airlines_complete/airlines-1472662091753.json.zip')
-    #unzip_all('airlines_complete')
-    pass
