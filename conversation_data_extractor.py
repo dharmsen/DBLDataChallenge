@@ -22,7 +22,7 @@ class conversation_extractor:
             try:
                 yield json.loads(line)
             except json.decoder.JSONDecodeError:
-                # for now
+                # TODO handle this
                 pass
 
     def add_content(self):
@@ -46,5 +46,3 @@ class conversation_extractor:
         content = self.add_content()
         dataframe = pd.DataFrame(content, columns=self.features)
         return dataframe
-
-

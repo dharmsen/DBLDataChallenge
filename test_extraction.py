@@ -1,5 +1,5 @@
 from conversation_data_extractor import conversation_extractor
-from create_table import SaveDataFrameAsDB, LoadDatabaseAsDF
+from DataBaseInterface import SaveDataFrameAsDB, LoadDatabaseAsDF
 
 if __name__ == '__main__':
     extractor = conversation_extractor('test_file.json', features=['id', 'text',
