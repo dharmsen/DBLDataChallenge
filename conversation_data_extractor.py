@@ -35,6 +35,7 @@ class conversation_extractor:
             try:
                 rows.append([row[x] for x in self.features])
             except KeyError:
+                # TODO Look into and fix KeyError with 'id'
                 pass
         return rows
 
