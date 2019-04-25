@@ -33,7 +33,7 @@ class conversation_extractor:
         rows = []
         for row in self.generator:
             try:
-                rows.append([row[x] for x in self.features])
+                rows.append([row[x] if isinstance(x, str) else row[x[0]][x[1]] for x in self.features])
             except KeyError:
                 # TODO Look into and fix KeyError with 'id'
                 pass
@@ -44,6 +44,7 @@ class conversation_extractor:
         Combines the features and content into a dataframe
         '''
         content = self.add_content()
+        print(content)
         dataframe = pd.DataFrame(content, columns=self.features)
         return dataframe
 
