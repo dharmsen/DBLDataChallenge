@@ -22,14 +22,15 @@ class conversation_extractor:
         '''
         i = 1
         for file in self.items:
-            print(f'Loading file {i}/{len(self.items)}: {file}')
             if not file.endswith('.json'): continue
+            print(f'Loading file {i}/{len(self.items)}: {file}')
             for line in open(self.directory + file, mode='r'):
                 try:
                     yield json.loads(line)
-                except json.decoder.JSONDecodeError or UnicodeDecodeError:
+                except json.decoder.JSONDecodeError: #or UnicodeDecodeError:
                     # TODO handle this
                     pass
+            i += 1
 
 
     def add_content(self):
