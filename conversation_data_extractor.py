@@ -1,3 +1,4 @@
+import os
 import json
 import pandas as pd
 
@@ -7,10 +8,11 @@ class conversation_extractor:
     Converts a single JSON file to DataFrame with
     specified features
     '''
-    def __init__(self, path, features):
-        self.path = path
+    def __init__(self, directory, features):
         self.features = features
         self.generator = self.json_readr()
+        self.directory = directory
+        self.items = os.listdir(directory)[:5]
 
     def json_readr(self):
         '''
@@ -18,12 +20,17 @@ class conversation_extractor:
         creates a Python generator object
         out of a JSON file
         '''
-        for line in open(self.path, mode='r'):
-            try:
-                yield json.loads(line)
-            except json.decoder.JSONDecodeError:
-                # TODO handle this
-                pass
+        i = 1
+        for file in self.items:
+            print(f'Loading file {i}/{len(self.items)}: {file}')
+            if not file.endswith('.json'): continue
+            for line in open(self.directory + file, mode='r'):
+                try:
+                    yield json.loads(line)
+                except json.decoder.JSONDecodeError or UnicodeDecodeError:
+                    # TODO handle this
+                    pass
+
 
     def add_content(self):
         '''
