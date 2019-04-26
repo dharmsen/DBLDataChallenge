@@ -27,9 +27,10 @@ class conversation_extractor:
             for line in open(self.directory + file, mode='r'):
                 try:
                     yield json.loads(line)
-                except json.decoder.JSONDecodeError or UnicodeDecodeError:
+                except json.decoder.JSONDecodeError: #or UnicodeDecodeError:
                     # TODO handle this
                     pass
+            i += 1
 
 
     def add_content(self):
