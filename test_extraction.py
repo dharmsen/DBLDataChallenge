@@ -5,12 +5,28 @@ from DataBaseInterface import SaveDataFrameAsDB, LoadDatabaseAsDF
 if __name__ == '__main__':
     directory = 'test_directory/'
     items = os.listdir(directory)
-    extractor = conversation_extractor(directory=directory, features=['id_str', 'text',
-                                                                   'lang', 'created_at',
-                                                                   'in_reply_to_status_id',
-                                                                   'in_reply_to_user_id',
-                                                                   'in_reply_to_screen_name',
-                                                                   ('user', 'id_str')])
+    conversation_features = ['id_str', 'text',
+                             'lang', 'created_at',
+                             'in_reply_to_status_id_str',
+                             'in_reply_to_user_id_str',
+                             'in_reply_to_screen_name',
+                             ('user', 'id_str')]
+    metadata_features= ('entities', 'hashtags'), ('entities', 'symbols')
+    base_features = ['created_at', 'favorite_count', 'id_str',
+                     'in_reply_to_status_id_str', 'in_reply_to_user_id_str',
+                     'in_reply_to_screen_name', 'lang', 'retweet_count',
+                     'retweeted', 'text', 'timestamp_ms', 'truncated']
+    user_features = [('user', x) for x in ['created_at', 'default_profile',
+                                         'description', 'favourites_count',
+                                         'follow_request_sent', 'followers_count',
+                                         'following', 'friends_count', 'geo_enabled',
+                                         'id_str', 'lang', 'listed_count',
+                                         'location', 'name', 'notifications',
+                                         'protected', 'screen_name',
+                                         'statuses_count', 'time_zone', 'url',
+                                         'utc_offset', 'verified']]
+
+    extractor = conversation_extractor(directory=directory, features=base_features + user_features)
     dataframe = extractor.make_dataframe()
     print(dataframe.head(2))
     print(f'Shape: {dataframe.shape}')
