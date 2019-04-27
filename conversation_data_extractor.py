@@ -2,7 +2,6 @@ import os
 import json
 import pandas as pd
 
-
 class conversation_extractor:
     '''
     Converts a single JSON file to DataFrame with
@@ -27,11 +26,10 @@ class conversation_extractor:
             for line in open(self.directory + file, mode='r'):
                 try:
                     yield json.loads(line)
-                except json.decoder.JSONDecodeError: #or UnicodeDecodeError:
+                except json.decoder.JSONDecodeError:
                     # TODO handle this
                     pass
             i += 1
-
 
     def add_content(self):
         '''

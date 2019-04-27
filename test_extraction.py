@@ -7,10 +7,13 @@ if __name__ == '__main__':
     items = os.listdir(directory)
     conversation_features = ['id_str', 'text',
                              'lang', 'created_at',
-                             'in_reply_to_status_id',
-                             'in_reply_to_user_id',
+                             'in_reply_to_status_id_str',
+                             'in_reply_to_user_id_str',
                              'in_reply_to_screen_name',
                              ('user', 'id_str')]
+    all_features = ['id_str', 'text', 'lang', 'created_at',
+                    'in_reply_to_status_id', 'in_reply_to_user_id',
+                    'in_reply_to_screen_name', ('user', 'id_str')]
 
     extractor = conversation_extractor(directory=directory, features=conversation_features)
     dataframe = extractor.make_dataframe()
