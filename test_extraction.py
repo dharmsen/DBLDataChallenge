@@ -33,10 +33,10 @@ if __name__ == '__main__':
     print('\n')
 
     print('dumping dataframe in database test_file.db')
-    SaveDataFrameAsDB(dataframe, filename='all_features_database.db')
+    SaveDataFrameAsDB(dataframe, filename='test_file2.db')
 
     print('\n')
     print('loading dataframe again as sanitycheck')
-    df2 = LoadDatabaseAsDF('all_features_database.db')
+    df2 = LoadDatabaseAsDF('test_file2.db')
     print(df2.head(2))
     print(f'Shape: {df2.shape}')

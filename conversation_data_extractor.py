@@ -11,7 +11,7 @@ class conversation_extractor:
         self.features = features
         self.generator = self.json_readr()
         self.directory = directory
-        self.items = os.listdir(directory)
+        self.items = os.listdir(directory)[:5]
 
     def json_readr(self):
         '''
@@ -44,8 +44,8 @@ class conversation_extractor:
             try:
                 rows.append([row[x] if isinstance(x, str) else row[x[0]][x[1]] for x in self.features])
             except KeyError:
-                print(f'--KeyError at line {i}--')
-                # TODO Look into and fix KeyError with 'id'
+                #print(f'--KeyError at line {i}--')
+                # TODO Look into and fix KeyErrors
                 pass
             i += 1
         return rows
