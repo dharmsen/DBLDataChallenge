@@ -23,12 +23,14 @@ class conversation_extractor:
         for file in self.items:
             if not file.endswith('.json'): continue
             print(f'Loading file {i}/{len(self.items)}: {file}')
+            n = 1
             for line in open(self.directory + file, mode='r'):
                 try:
                     yield json.loads(line)
                 except json.decoder.JSONDecodeError:
                     # TODO handle this
-                    pass
+                    print(f'--JSONDecodeError at file: [{file}], line: [{n}]--')
+                n += 1
             i += 1
 
     def add_content(self):
@@ -36,13 +38,16 @@ class conversation_extractor:
         Creates a list of lists for constructing
         the dataframe
         '''
+        i = 1
         rows = []
         for row in self.generator:
             try:
                 rows.append([row[x] if isinstance(x, str) else row[x[0]][x[1]] for x in self.features])
             except KeyError:
+                print(f'--KeyError at line {i}--')
                 # TODO Look into and fix KeyError with 'id'
                 pass
+            i += 1
         return rows
 
     def make_dataframe(self):
