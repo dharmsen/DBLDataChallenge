@@ -4,20 +4,20 @@ import pandas as pd
 
 class conversation_extractor:
     '''
-    Converts a single JSON file to DataFrame with
+    Converts a multiple JSON files to a DataFrame with
     specified features
     '''
     def __init__(self, directory, features):
         self.features = features
         self.generator = self.json_readr()
         self.directory = directory
-        self.items = os.listdir(directory)[:5]
+        self.items = os.listdir(directory)
 
     def json_readr(self):
         '''
         Iterates over lines and
         creates a Python generator object
-        out of a JSON file
+        out of JSON files
         '''
         i = 1
         for file in self.items:

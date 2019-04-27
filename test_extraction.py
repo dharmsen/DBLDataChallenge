@@ -26,10 +26,6 @@ if __name__ == '__main__':
                                          'statuses_count', 'time_zone', 'url',
                                          'utc_offset', 'verified']]
 
-    all_features = ['id_str', 'text', 'lang', 'created_at',
-                    'in_reply_to_status_id', 'in_reply_to_user_id',
-                    'in_reply_to_screen_name', ('user', 'id_str')]
-
     extractor = conversation_extractor(directory=directory, features=base_features + user_features)
     dataframe = extractor.make_dataframe()
     print(dataframe.head(2))
