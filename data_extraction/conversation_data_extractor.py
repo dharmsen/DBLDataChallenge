@@ -4,7 +4,7 @@ import pandas as pd
 
 class conversation_extractor:
     '''
-    Converts a multiple JSON files to a DataFrame with
+    Converts multiple JSON files to a DataFrame with
     specified features
     '''
     def __init__(self, directory, features):
@@ -28,7 +28,6 @@ class conversation_extractor:
                 try:
                     yield json.loads(line)
                 except json.decoder.JSONDecodeError:
-                    # TODO handle this
                     print(f'--JSONDecodeError at file: [{file}], line: [{n}]--')
                 n += 1
             i += 1
@@ -36,7 +35,7 @@ class conversation_extractor:
     def add_content(self):
         '''
         Creates a list of lists for constructing
-        the dataframe
+        the DataFrame
         '''
         i = 1
         rows = []
@@ -44,7 +43,6 @@ class conversation_extractor:
             try:
                 rows.append([row[x] if isinstance(x, str) else row[x[0]][x[1]] for x in self.features])
             except KeyError:
-                #print(f'--KeyError at line {i}--')
                 # TODO Look into and fix KeyErrors
                 pass
             i += 1
@@ -52,7 +50,7 @@ class conversation_extractor:
 
     def make_dataframe(self):
         '''
-        Combines the features and content into a dataframe
+        Combines the features and content into a DataFrame
         '''
         content = self.add_content()
         print(content)
