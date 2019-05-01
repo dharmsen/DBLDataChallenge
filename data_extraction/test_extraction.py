@@ -1,6 +1,6 @@
 import os
-from conversation_data_extractor import conversation_extractor
-from DataBaseInterface import SaveDataFrameAsDB, LoadDatabaseAsDF
+from data_extraction.conversation_data_extractor import conversation_extractor
+from data_extraction.DataBaseInterface import SaveDataFrameAsDB, LoadDatabaseAsDF
 
 if __name__ == '__main__':
     directory = 'test_directory/'
