@@ -1,6 +1,7 @@
 from DataBaseInterface import LoadDatabaseAsDF
 import pandas as pd
 import csv
+import datetime
 
 df = LoadDatabaseAsDF('10_jsons.db', ['tweets',])[0]
 print(df.shape)
@@ -23,6 +24,11 @@ for item, row in df[::-1].iterrows():
         print('There are ' + str(len(conversations)) + 'wanted tweets so far')
         print('running time.. ' + str(datetime.now() - startTime))
         print('=============================================================')
+    if ((int(item) % 1000000) == 0):
+        with open('full_db_conversations.csv', 'w', newline='') as csv_file:
+            writer = csv.writer(csv_file)
+            for key, value in conversations.items():
+               writer.writerow([key, value])
 
     if int(row['id_str']) in wanted:
         conversation_id = wanted[int(row['id_str'])]
