@@ -2,12 +2,17 @@
 import pandas as pd
 import sqlite3 #To write database
 
-def SaveDataFrameAsDB(df, filename='maintable.db'):
-    print('saving dataframe to ' + filename)
+def SaveDataFrameAsDB(dataframes, filename='maintable.db', tables):
+    '''
+    Returns a database of tables with names tables extracted from dataframes to
+    filename
+    '''
     cxn = sqlite3.connect(filename)
-    df.to_sql("tweets", cxn, index=False, if_exists='replace')
+    for i in range(len(dataframes)):
+        print('saving dataframe ' + str(i) + ' to ' + filename)
+        dataframes[i].to_sql(tables[i], cxn, index=False, if_exists='replace')
 
-    return 'table.db'
+    return filename
 
 def LoadDatabaseAsDF(dataframes, filename, tables):
     '''
