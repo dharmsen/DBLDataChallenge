@@ -2,15 +2,35 @@
 import pandas as pd
 import sqlite3 #To write database
 
-def SaveDataFrameAsDB(df, filename='maintable.db'):
-    print('saving dataframe to ' + filename)
+def SaveDataFrameAsDB(dataframes, tables, filename='maintable.db'):
+    '''
+    Returns a database of tables with names tables extracted from dataframes to
+    filename
+
+    Input: dataframes - list of DataFrames
+    filename - string of filename of the database
+    tables - list of strings with names of tables to add to database
+
+    Output : filename of database
+    '''
     cxn = sqlite3.connect(filename)
-    df.to_sql("tweets", cxn, index=False, if_exists='replace')
+    print(type(dataframes))
+    for df, table in zip(dataframes,tables):
+        df.to_sql(table, cxn, index=False, if_exists='replace')
 
-    return 'table.db'
+    return filename
 
-def LoadDatabaseAsDF(filename, n_rows=None):
+def LoadDatabaseAsDF(filename, tables, n_rows=None):
+    '''
+    Returns a list of Pandas DataFrames with names dataframes, extracted from
+    tables in database filename.
 
+    Input: dataframes - list of strings with names for the dataframes
+    filename - string of filename of the database
+    tables - list of strings with names of tables
+
+    Output: list of DataFrames with names dataframes
+    '''
     if '.db' not in filename:
         filename = filename + '.db'
         print('appended .db file extentions to filename')
@@ -18,11 +38,21 @@ def LoadDatabaseAsDF(filename, n_rows=None):
     print('reading from ' + filename)
 
     cnx = sqlite3.connect(filename)
+    dfList = []
     if n_rows != None:
-        df = pd.read_sql_query(f"SELECT * FROM tweets LIMIT {n_rows}", cnx)
+        for i in range(len(tables)):
+            print('creating dataframe from table ' + tables[i])
+            query = "SELECT * FROM " + tables[i] + f'LIMIT {n_rows}'
+            df = pd.read_sql_query(query, cnx)
+            dfList.append(df)
     else:
-        df = pd.read_sql_query("SELECT * FROM tweets", cnx)
-    return df
+        for i in range(len(tables)):
+            print('creating dataframe from table ' + tables[i])
+            query = "SELECT * FROM " + tables[i]
+            df = pd.read_sql_query(query, cnx)
+            dfList.append(df)
+
+    return dfList
 
 if __name__ == "__main__":
     df = pd.DataFrame(data={'col1': [1, 2], 'col2': [3, 4]})
