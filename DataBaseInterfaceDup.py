@@ -20,7 +20,7 @@ def SaveDataFrameAsDB(dataframes, filename='maintable.db', tables):
 
     return filename
 
-def LoadDatabaseAsDF(dataframes, filename, tables):
+def LoadDatabaseAsDF(dataframes, filename, tables, n_rows=None):
     '''
     Returns a list of Pandas DataFrames with names dataframes, extracted from
     tables in database filename.
@@ -39,11 +39,18 @@ def LoadDatabaseAsDF(dataframes, filename, tables):
 
     cnx = sqlite3.connect(filename)
     dfList = []
-    for i in range(len(tables)):
-        print('creating dataframe ' + dataframes[i] + 'from table' + tables[i])
-        query = "SELECT * FROM " + tables[i]
-        exec('{} = pd.read_sql_query(query, cnx)''.format(dataframes[i]))
-        exec('dfList.append({})'.format(dataframes[i]))
+    if n_rows != None:
+        for i in range(len(tables)):
+            print('creating dataframe ' + dataframes[i] + 'from table' + tables[i])
+            query = "SELECT * FROM " + tables[i] + f'LIMIT {n_rows}'
+            exec('{} = pd.read_sql_query(query, cnx)''.format(dataframes[i]))
+            exec('dfList.append({})'.format(dataframes[i]))
+    else:
+        for i in range(len(tables)):
+            print('creating dataframe ' + dataframes[i] + 'from table' + tables[i])
+            query = "SELECT * FROM " + tables[i]
+            exec('{} = pd.read_sql_query(query, cnx)''.format(dataframes[i]))
+            exec('dfList.append({})'.format(dataframes[i]))
 
     return dfList
 
