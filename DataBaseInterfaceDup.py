@@ -6,6 +6,12 @@ def SaveDataFrameAsDB(dataframes, filename='maintable.db', tables):
     '''
     Returns a database of tables with names tables extracted from dataframes to
     filename
+
+    Input: dataframes - list of DataFrames
+    filename - string of filename of the database
+    tables - list of strings with names of tables to add to database
+
+    Output : filename of database
     '''
     cxn = sqlite3.connect(filename)
     for i in range(len(dataframes)):
