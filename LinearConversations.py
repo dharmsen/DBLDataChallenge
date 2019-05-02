@@ -20,11 +20,7 @@ for item, row in df.iterrows():
         try:
             conversations[conversation_id] = conversations[conversation_id].append(TweetEntry(row))
         except AttributeError:
-            with open('dict.csv', 'w') as csv_file:
-                writer = csv.writer(csv_file)
-                for key, value in conversations.items():
-                   writer.writerow([key, value])
-            print(item)
+            print('nonetype error at ' + str(item))
 
         if isinstance(row['in_reply_to_status_id'], float):
             wanted[row['in_reply_to_status_id']] = conversation_id
@@ -33,4 +29,7 @@ for item, row in df.iterrows():
         wanted[row['in_reply_to_status_id']] = conversations_count
         conversations_count += 1
 
-#df_final.to_csv('convo_10_jsons.csv')
+with open('dict.csv', 'w') as csv_file:
+    writer = csv.writer(csv_file)
+    for key, value in conversations.items():
+       writer.writerow([key, value])
