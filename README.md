@@ -37,13 +37,9 @@ The tweet_ids and user_ids are in a string format but can be converted using the
 Example:
 ```
 # --------- Load in dataframe ---------------------
-import sys
 import pandas as pd
 
-sys.path.insert(0, '/data_extraction/')
-from DataBaseInterface import LoadDatabaseAsDF
-
-df = LoadDatabaseAsDF('test_file.db')
+df = pd.read_csv('conversations_10_jsons.csv')
 # ---------------------------------------------------
 # ----------- Get all tweet ids of a conversation ----
 sample_conv_tweet_ids = eval(df['tweet_ids'][0])
