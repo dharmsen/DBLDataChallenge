@@ -43,13 +43,13 @@ def LoadDatabaseAsDF(dataframes, filename, tables, n_rows=None):
         for i in range(len(tables)):
             print('creating dataframe ' + dataframes[i] + 'from table' + tables[i])
             query = "SELECT * FROM " + tables[i] + f'LIMIT {n_rows}'
-            exec('{} = pd.read_sql_query(query, cnx)''.format(dataframes[i]))
+            exec('{} = pd.read_sql_query(query, cnx)'.format(dataframes[i]))
             exec('dfList.append({})'.format(dataframes[i]))
     else:
         for i in range(len(tables)):
             print('creating dataframe ' + dataframes[i] + 'from table' + tables[i])
             query = "SELECT * FROM " + tables[i]
-            exec('{} = pd.read_sql_query(query, cnx)''.format(dataframes[i]))
+            exec('{} = pd.read_sql_query(query, cnx)'.format(dataframes[i]))
             exec('dfList.append({})'.format(dataframes[i]))
 
     return dfList
