@@ -1,6 +1,7 @@
 # DBL-DataChallenge
 
-## WORKING WITH test_file.db
+## WORKING WITH test_file.db 
+OUTDATED
 test_file.db is one json extracted. If you work in this directory, this is the code you have to add to get the database in a pandas dataframe, with which you can do whatever you want.
 ```
 import sys
