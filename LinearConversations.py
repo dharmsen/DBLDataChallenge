@@ -16,9 +16,13 @@ conversations_count = 0
 wanted = {}
 for item, row in df.iterrows():
     if int(row['id_str']) in wanted:
+        print('id was in wanted ' + str(item))
         conversation_id = wanted[int(row['id_str'])]
         try:
-            conversations[conversation_id] = conversations[conversation_id].append(TweetEntry(row))
+            current_entry = conversations[conversation_id]
+            current_entry.append(TweetEntry(row))
+            conversations[conversation_id] = current_entry
+            print('list: ' + str(conversation_id) + ' ' + str(conversations[conversation_id]))
         except AttributeError:
             print('nonetype error at ' + str(item))
 
