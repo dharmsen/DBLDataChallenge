@@ -32,6 +32,7 @@ Contains conversations with at least one reply from 10 jsons.
 - conversation_length: The amount of tweets that are in the conversation.
 - tweet_ids: a list of tweet ids ('id_str in the database) of the conversation. 
 - user_ids: A list of all the user ids ("('user', 'id_str')" in the database) that are involved in the conversation.
+- airlines_involved: Specifies which airline is involved in the conversation.
 ### accessing the tweet_ids and user_ids
 The tweet_ids and user_ids are in a string format but can be converted using the built-in eval() function in Python.
 Example:
