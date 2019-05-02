@@ -24,7 +24,7 @@ Additionally, has a method that returns the filenames of the files in the first 
 ## dates_string.txt
 (Lourens) Result from dates_string.py
 
-## conversations_10_jsons.py
+## /small_datasets/conversations_10_jsons.py
 Contains conversations with at least one reply from 10 jsons. 
 ### Column description
 - conversation_id: We will use this to specify which conversation we are talking about.
