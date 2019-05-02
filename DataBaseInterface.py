@@ -9,7 +9,7 @@ def SaveDataFrameAsDB(df, filename='maintable.db'):
 
     return 'table.db'
 
-def LoadDatabaseAsDF(filename):
+def LoadDatabaseAsDF(filename, n_rows=None):
 
     if '.db' not in filename:
         filename = filename + '.db'
@@ -18,8 +18,10 @@ def LoadDatabaseAsDF(filename):
     print('reading from ' + filename)
 
     cnx = sqlite3.connect(filename)
-    df = pd.read_sql_query("SELECT * FROM tweets", cnx)
-
+    if n_rows != None:
+        df = pd.read_sql_query(f"SELECT * FROM tweets LIMIT {n_rows}", cnx)
+    else:
+        df = pd.read_sql_query("SELECT * FROM tweets", cnx)
     return df
 
 if __name__ == "__main__":
