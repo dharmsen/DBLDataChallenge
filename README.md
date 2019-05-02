@@ -3,8 +3,11 @@
 ## WORKING WITH test_file.db
 test_file.db is one json extracted. If you work in this directory, this is the code you have to add to get the database in a pandas dataframe, with which you can do whatever you want.
 ```
-from DataBaseInterface import LoadDatabaseAsDF
+import sys
 import pandas as pd
+
+sys.path.insert(0, '/data_extraction/')
+from DataBaseInterface import LoadDatabaseAsDF
 
 dataframe = LoadDatabaseAsDF('test_file.db')
 ```
