@@ -14,10 +14,17 @@ def TweetEntry(row):
 conversations = {}
 conversations_count = 0
 wanted = {}
+startTime = datetime.now()
 
 for item, row in df[::-1].iterrows():
+    if ((int(item) % 10000) == 0):
+        print('At row ' + str(item))
+        print('There are ' + str(conversation_id) + 'conversations so far')
+        print('There are ' + str(len(conversations)) + 'wanted tweets so far')
+        print('running time.. ' + str(datetime.now() - startTime))
+        print('=============================================================')
+
     if int(row['id_str']) in wanted:
-        print('id was in wanted ' + str(item))
         conversation_id = wanted[int(row['id_str'])]
         try:
             current_entry = conversations[conversation_id]
@@ -28,8 +35,6 @@ for item, row in df[::-1].iterrows():
         except AttributeError:
             print('nonetype error at ' + str(item))
 
-
-
         if isinstance(row['in_reply_to_status_id'], float):
             wanted[row['in_reply_to_status_id']] = conversation_id
     elif isinstance(row['in_reply_to_status_id'], float):
@@ -37,7 +42,7 @@ for item, row in df[::-1].iterrows():
         wanted[row['in_reply_to_status_id']] = conversations_count
         conversations_count += 1
 
-with open('dict2.csv', 'w', newline='') as csv_file:
+with open('full_db_conversations.csv', 'w', newline='') as csv_file:
     writer = csv.writer(csv_file)
     for key, value in conversations.items():
        writer.writerow([key, value])
