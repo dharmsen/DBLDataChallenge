@@ -1,5 +1,6 @@
 # Dependencies
 import time
+import sqlite3
 import pandas as pd
 
 class ConversationWrangler:
@@ -11,8 +12,12 @@ class ConversationWrangler:
             Takes a conversation csv file with the columns 'conversation_id' and 'raw_tweets_info'
         '''
         self.file_name = file_name
-        # Read csv in DataFrame
+        # Read in files to DataFrames
+        print('Reading in datasets')
         self.df = pd.read_csv(self.file_name, names=['conversation_id', 'raw_tweets_info'])
+        self.conn = sqlite3.connect('full_conversation_database.db')
+        self.conv_df = pd.read_sql('SELECT * from tweets', self.conn)
+        print('Loaded both dataframes. Continuing with wrangling operations')
 
     def conversation_length(self):
         '''
@@ -20,15 +25,17 @@ class ConversationWrangler:
         to a new column
         '''
         self.df['conversation_length'] = [len(eval(tweet)) for tweet in list(self.df['raw_tweets_info'])]
+        print('conversation_length added')
 
     def filter_conversations(self, min_length=2):
         '''
         Keeps only conversation which have a certain length
         Take an argument 'min_length' which the denotes
         the minimum length of conversations you want to keep
+        Requires conversation length to be computed
         '''
         self.df = self.df[self.df['conversation_length'] >= min_length]
-
+        print('filter_conversations added')
 
     def tweet_ids(self):
         '''
@@ -46,6 +53,7 @@ class ConversationWrangler:
 
         # Add tweet_ids feature to DataFrame
         self.df['tweet_ids'] = tweet_ids
+        print('tweets_ids added')
 
     def user_ids(self):
         '''.
@@ -63,6 +71,7 @@ class ConversationWrangler:
 
         # Add user_ids feature to DataFrame
         self.df['user_ids'] = user_ids
+        print('user_ids added')
 
     def airlines_involved(self):
         '''
@@ -93,6 +102,26 @@ class ConversationWrangler:
 
         # Append feature to the DataFrame
         self.df['airlines_involved'] = airlines
+        print('airlines_involved added')
+
+    # TODO Optimize add_conversations function
+    def add_conversations(self):
+        '''
+        Adds conversations for every row.
+        Requires two datasets to be loaded
+        Requires tweet_ids to be added
+        '''
+        all_conversations = []
+        for row in list(self.df['tweet_ids']):
+            conversation = []
+            i = 1
+            for tweet_id in list(row):
+                tweet = self.conv_df[self.conv_df['id_str'] == tweet_id]['text']
+                conversation.append(f'Tweet: {i}, {tweet}')
+                i += 1
+            all_conversations.append(conversation)
+        self.df['conversation'] = all_conversations
+        print('conversation feature added')
 
     def to_csv(self, file_name=None):
         '''
@@ -102,6 +131,7 @@ class ConversationWrangler:
             # Standard file_name
             file_name = f'wrangled_{self.file_name}'
         self.df.to_csv(file_name, index=False)
+        print('Saved to csv')
 
     def to_sql_table(self):
         '''
@@ -120,18 +150,21 @@ class ConversationWrangler:
         self.tweet_ids()
         self.user_ids()
         self.airlines_involved()
+        self.add_conversations()
         self.to_csv(file_name=file_name)
+        print('Done with full_standard_wrangle!')
+
 
 if __name__ == '__main__':
     # Keep time
     t_start = time.time()
     # Do the wrangling
     wrangler = ConversationWrangler('full_db_conversations_final.csv')
-    wrangler.full_standard_wrangle(min_length=2, file_name=None)
+    wrangler.full_standard_wrangle(min_length=15, file_name='long_conversations_db.csv')
 
     # Check and print how many seconds it took
     t_finish = time.time()
-    total_time = round((t_finish - t_start), 4)
+    total_time = round((t_finish - t_start), 2)
     print('Runtime = {} seconds'.format(total_time))
 
 
