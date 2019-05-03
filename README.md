@@ -7,7 +7,7 @@
 
 * The LoadDatabaseAsDF returns a list of  two dataframes if you enter ```['tweets', 'conversations']```.
 * The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
-* The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
+* The LoadDatabaseAsDF returns one dataframe if you enter ```['conversations',]```.
 
 NOTE: the conversations table in the db is not very informative, if you want to have quicker insight in the conversations, check out the section "importing conversation CSV's" below.
 
