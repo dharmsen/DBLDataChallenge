@@ -9,6 +9,8 @@ The LoadDatabaseAsDF returns a list of  two dataframes if you enter ```['tweets'
 The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
 The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
 
+NOTE: the conversations table in the db is not very informative, if you want to have quicker insight in the conversations, check out the section "importing conversation CSV's" below.
+
 You can select how many rows you want returned by adding the extra n_rows argument. Recommended would be to do this when coding so the running times are quicker and then for the final run / visualization import the entirety by removing the n_rows= argument.
 
 The following code imports 500000 rows of both tables and assigns the dataframes to the variables tweets_df and conversations_df.
@@ -23,6 +25,9 @@ conversations_df = dflists[1]
 ```
 
 ## IMPORTING CONVERSATION CSV'S
+You can also import the conversation files from the csvs in the repo. Make sure you create your script/notebook in the same folder as the DataBaseInterface.py file and the .csv file.
+
+The code below is very simple and should be self-explanatory.
 
 ```
 df = pd.read_csv('ALL_CONVERSATIONS_WRANGLED.csv')
