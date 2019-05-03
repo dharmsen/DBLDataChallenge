@@ -28,7 +28,25 @@ conversations_df = dflists[1]
 You can also import the conversation files from the csvs in the repo. Make sure you create your script/notebook in the same folder as the DataBaseInterface.py file and the .csv file.
 
 The code below is very simple and should be self-explanatory.
-
 ```
 df = pd.read_csv('ALL_CONVERSATIONS_WRANGLED.csv')
 ```
+
+### accessing the tweet_ids and user_ids
+The tweet_ids and user_ids are in a string format but can be converted to a list using the built-in eval() function in Python. Example:
+```
+# ----------- Get all tweet ids of a conversation ----
+sample_conv_tweet_ids = eval(df['tweet_ids'][0])
+# sample_conv_tweet_ids is now a list of all tweet ids for one conversation (the first)
+
+# ----------- Get all user ids of a conversation ----
+sample_conv_user_ids = eval(df['user_ids'][0])
+# sample_conv_user_ids is now a list of all user ids for one conversation (the first)
+```
+
+### Column description
+- conversation_id: We will use this to specify which conversation we are talking about.
+- raw_tweets_info: Just there for reference. Not useful to use for analysis.
+- conversation_length: The amount of tweets that are in the conversation.
+- tweet_ids: a list of tweet ids ('id_str in the database) of the conversation.
+- user_ids: A list of all the user ids ("('user', 'id_str')" in the database) that are involved in the conversation.
