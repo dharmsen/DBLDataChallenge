@@ -18,6 +18,7 @@ class ConversationWrangler:
         self.conn = sqlite3.connect('full_conversation_database.db')
         self.conv_df = pd.read_sql('SELECT * from tweets', self.conn)
         print('Loaded both dataframes. Continuing with wrangling operations')
+        self.conn.close()
 
     def conversation_length(self):
         '''
