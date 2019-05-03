@@ -38,8 +38,7 @@ for item, row in df[::-1].iterrows():
         print('There are ' + str(len(wanted)) + ' wanted tweets so far')
         print('running time.. ' + str(datetime.now() - startTime))
         print('=============================================================')
-        SaveProgress(conversations, wanted, item)
-    if ((int(item) % 500000) == 0):
+    if ((int(item) % 250000) == 0):
         SaveProgress(conversations, wanted, item)
 
     if int(row['id_str']) in wanted:
@@ -54,13 +53,11 @@ for item, row in df[::-1].iterrows():
             error_count += 1
 
         if not np.isnan(row['in_reply_to_status_id']):
-                print(row['in_reply_to_status_id'])
-                wanted[row['in_reply_to_status_id']] = conversation_id:
+                wanted[row['in_reply_to_status_id']] = conversation_id
     elif not np.isnan(row['in_reply_to_status_id']):
-        print(row['in_reply_to_status_id'])
         conversations_count = len(conversations)
         conversations[conversations_count] = [TweetEntry(row),]
-        wanted[int(row['in_reply_to_status_id')]] = conversations_count
+        wanted[int(row['in_reply_to_status_id'])] = conversations_count
 
 SaveProgress(conversations, wanted, 'final')
 
