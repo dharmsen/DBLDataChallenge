@@ -111,12 +111,13 @@ class ConversationWrangler:
         Requires two datasets to be loaded
         Requires tweet_ids to be added
         '''
+        print('Starting add_conversations')
         all_conversations = []
         for row in list(self.df['tweet_ids']):
             conversation = []
             i = 1
             for tweet_id in list(row):
-                tweet = self.conv_df[self.conv_df['id_str'] == tweet_id]['text']
+                tweet = self.conv_df[self.conv_df['id_str'] == str(tweet_id)]['text'].item()
                 conversation.append(f'Tweet: {i}, {tweet}')
                 i += 1
             all_conversations.append(conversation)
