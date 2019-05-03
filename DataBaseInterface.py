@@ -42,7 +42,7 @@ def LoadDatabaseAsDF(filename, tables, n_rows=None):
     if n_rows != None:
         for i in range(len(tables)):
             print('creating dataframe from table ' + tables[i])
-            query = "SELECT * FROM " + tables[i] + f'LIMIT {n_rows}'
+            query = "SELECT * FROM " + tables[i] + f' LIMIT {n_rows}'
             df = pd.read_sql_query(query, cnx)
             dfList.append(df)
     else:
