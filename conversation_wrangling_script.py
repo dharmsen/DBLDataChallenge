@@ -103,7 +103,7 @@ class ConversationWrangler:
             file_name = f'wrangled_{self.file_name}'
         self.df.to_csv(file_name, index=False)
 
-    def to_table(self):
+    def to_sql_table(self):
         '''
         Adds the DataFrame to an SQL table
         '''
@@ -123,9 +123,13 @@ class ConversationWrangler:
         self.to_csv(file_name=file_name)
 
 if __name__ == '__main__':
+    # Keep time
     t_start = time.time()
+    # Do the wrangling
     wrangler = ConversationWrangler('full_db_conversations_final.csv')
     wrangler.full_standard_wrangle(min_length=2, file_name=None)
+
+    # Check and print how many seconds it took
     t_finish = time.time()
     total_time = round((t_finish - t_start), 4)
     print('Runtime = {} seconds'.format(total_time))
