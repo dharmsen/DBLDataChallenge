@@ -50,3 +50,4 @@ sample_conv_user_ids = eval(df['user_ids'][0])
 - conversation_length: The amount of tweets that are in the conversation.
 - tweet_ids: a list of tweet ids ('id_str in the database) of the conversation.
 - user_ids: A list of all the user ids ("('user', 'id_str')" in the database) that are involved in the conversation.
+- airlines_involved: Shows which airlines are involved in the conversation.
