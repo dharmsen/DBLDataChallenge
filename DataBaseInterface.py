@@ -52,7 +52,10 @@ def LoadDatabaseAsDF(filename, tables, n_rows=None):
             df = pd.read_sql_query(query, cnx)
             dfList.append(df)
 
-    return dfList
+    if len(dfList) == 1:
+        return dfList[0]
+    else:
+        return dfList
 
 if __name__ == "__main__":
     df = pd.DataFrame(data={'col1': [1, 2], 'col2': [3, 4]})

@@ -4,7 +4,7 @@ import csv
 from datetime import datetime
 import numpy as np
 
-df = LoadDatabaseAsDF('full_conversation_database.db', ['tweets',])[0]
+df = LoadDatabaseAsDF('full_conversation_database.db', ['tweets',])
 print(df.shape)
 
 def TweetEntry(row):
