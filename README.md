@@ -1,13 +1,13 @@
 # DBL-DataChallenge
 
 ## IMPORTING DATABASES AS DATAFRAME
-Step 1: Download a database file from drive.
-Step 2: create your script/notebook in the same folder as the DataBaseInterface.py file and the .db file you've downloaded.
-Step 3: choose whether you want to import tweets and conversations in two dataframes, or just one.
-You do this with the second argument that is a list of the table names.
-The LoadDatabaseAsDF returns a list of  two dataframes if you enter ```['tweets', 'conversations']```.
-The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
-The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
+1. Download a database file from drive.
+2. create your script/notebook in the same folder as the DataBaseInterface.py file and the .db file you've downloaded.
+3. choose whether you want to import tweets and conversations in two dataframes, or just one. You do this with the second argument that is a list of the table names.
+
+* The LoadDatabaseAsDF returns a list of  two dataframes if you enter ```['tweets', 'conversations']```.
+* The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
+* The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
 
 NOTE: the conversations table in the db is not very informative, if you want to have quicker insight in the conversations, check out the section "importing conversation CSV's" below.
 
