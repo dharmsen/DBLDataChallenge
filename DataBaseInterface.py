@@ -4,15 +4,19 @@ import sqlite3 #To write database
 
 def SaveDataFrameAsDB(dataframes, tables, filename='maintable.db'):
     '''
-    Returns a database of tables with names tables extracted from dataframes to
-    filename
+    Saves dataframes as tables to a database specified by filename, and returns
+    the filename.
 
     Input: dataframes - list of DataFrames
-    filename - string of filename of the database
     tables - list of strings with names of tables to add to database
+    filename (optional, default='maintable.db') - string of filename of the database
 
     Output : filename of database
     '''
+    if '.db' not in filename:
+        filename = filename + '.db'
+        print('appended .db file extentions to filename')
+
     cxn = sqlite3.connect(filename)
     print(type(dataframes))
     for df, table in zip(dataframes,tables):
@@ -22,12 +26,12 @@ def SaveDataFrameAsDB(dataframes, tables, filename='maintable.db'):
 
 def LoadDatabaseAsDF(filename, tables, n_rows=None):
     '''
-    Returns a list of Pandas DataFrames with names dataframes, extracted from
-    tables in database filename.
+    Returns a list of Pandas DataFrames (with optionally n_rows amount of rows
+    from table), extracted from tables in database filename.
 
-    Input: dataframes - list of strings with names for the dataframes
-    filename - string of filename of the database
+    Input: filename - string of filename of the database
     tables - list of strings with names of tables
+    n_rows (optional, default=None) - number of rows to extract from table
 
     Output: list of DataFrames with names dataframes
     '''
