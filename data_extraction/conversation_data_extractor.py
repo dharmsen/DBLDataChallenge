@@ -44,7 +44,7 @@ class conversation_extractor:
                 rows.append([row[x] if isinstance(x, str) else row[x[0]][x[1]] for x in self.features])
             except KeyError:
                 # TODO Look into and fix KeyErrors
-                pass
+                print('KeyError')
             i += 1
         return rows
 
