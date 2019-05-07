@@ -11,7 +11,7 @@ class conversation_extractor:
         self.features = features
         self.generator = self.json_readr()
         self.directory = directory
-        self.items = os.listdir(directory)[:5]
+        self.items = os.listdir(directory)
 
     def json_readr(self):
         '''
