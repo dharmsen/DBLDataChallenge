@@ -10,6 +10,7 @@ class conversation_extractor:
     def __init__(self, directory, features):
         self.features = features
         self.generator = self.json_readr()
+        self.cwd =  os.getcwd()
         self.directory = directory
         self.items = os.listdir(directory)
 

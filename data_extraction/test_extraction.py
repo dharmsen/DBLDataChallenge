@@ -3,7 +3,8 @@ from data_extraction.conversation_data_extractor import conversation_extractor
 from data_extraction.DataBaseInterface import SaveDataFrameAsDB, LoadDatabaseAsDF
 
 if __name__ == '__main__':
-    directory = os.path.abspath('test_directory/')
+    directory = 'test_directory/'
+    print(os.path.abspath(directory))
     #items = os.listdir(directory)
     conversation_features = ['id_str', 'text',
                              'lang', 'created_at',
