@@ -178,7 +178,7 @@ if __name__ == '__main__':
     # Keep time
     t_start = time.time()
     # Do the wrangling
-    wrangler = ConversationWrangler('full_db_conversations_final.csv')
+    wrangler = ConversationWrangler('Conversations.csv')
     #wrangler.full_standard_wrangle(min_length=2, file_name='wrangled_conversations_db_with_full_conversations.csv')
     wrangler.extract_conversations(min_length=2)
     # Check and print how many seconds it took
@@ -186,6 +186,3 @@ if __name__ == '__main__':
     total_time = round((t_finish - t_start), 2)
     print('Runtime = {} seconds'.format(total_time))
     wrangler.conn.close()
-
-
-
