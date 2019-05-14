@@ -160,7 +160,6 @@ class ConversationWrangler:
         self.tweet_ids()
         self.user_ids()
         self.airlines_involved()
-        #self.add_conversations()
         self.to_csv(file_name=file_name)
         print('Done with full_standard_wrangle!')
 
@@ -174,13 +173,13 @@ class ConversationWrangler:
         new_df = pd.DataFrame({'Conversations' : conversations})
         new_df.to_csv('Conversations.csv', index=False)
 
+
 if __name__ == '__main__':
     # Keep time
     t_start = time.time()
     # Do the wrangling
     wrangler = ConversationWrangler('full_db_conversations_final.csv')
-    #wrangler.full_standard_wrangle(min_length=2, file_name='wrangled_conversations_db_with_full_conversations.csv')
-    wrangler.extract_conversations(min_length=2)
+    wrangler.full_standard_wrangle(min_length=2, file_name='wrangled_conversations_db_with_full_conversations.csv')
     # Check and print how many seconds it took
     t_finish = time.time()
     total_time = round((t_finish - t_start), 2)
