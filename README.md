@@ -1,25 +1,53 @@
 # DBL-DataChallenge
 
-## WORKING WITH test_file.db
-test_file.db is one json extracted. If you work in this directory, this is the code you have to add to get the database in a pandas dataframe, with which you can do whatever you want.
+## IMPORTING DATABASES AS DATAFRAME
+1. Download a database file from drive.
+2. create your script/notebook in the same folder as the DataBaseInterface.py file and the .db file you've downloaded.
+3. choose whether you want to import tweets and conversations in two dataframes, or just one. You do this with the second argument that is a list of the table names.
+
+* The LoadDatabaseAsDF returns a list of  two dataframes if you enter ```['tweets', 'conversations']```.
+* The LoadDatabaseAsDF returns one dataframe if you enter ```['tweets',]```.
+* The LoadDatabaseAsDF returns one dataframe if you enter ```['conversations',]```.
+
+NOTE: the conversations table in the db is not very informative, if you want to have quicker insight in the conversations, check out the section "importing conversation CSV's" below.
+
+You can select how many rows you want returned by adding the extra n_rows argument. Recommended would be to do this when coding so the running times are quicker and then for the final run / visualization import the entirety by removing the n_rows= argument.
+
+The following code imports 500000 rows of both tables and assigns the dataframes to the variables tweets_df and conversations_df.
+
 ```
-from DataBaseInterface import LoadDatabaseAsDF
 import pandas as pd
+from DataBaseInterface import LoadDatabaseAsDF
 
-dataframe = LoadDatabaseAsDF('test_file.db')
+dflists = LoadDatabaseAsDF('ALL_DATA_32_FEATURES.db', ['tweets', 'conversations'], n_rows=500000)
+tweets_df = dflists[0]
+conversations_df = dflists[1]
 ```
 
-## test_extraction.py
-script that puts test_file.json into a database.
+## IMPORTING CONVERSATION CSV'S
+You can also import the conversation files from the csvs in the repo. Make sure you create your script/notebook in the same folder as the DataBaseInterface.py file and the .csv file.
 
-## dates_string.py
-(Lourens) Noted that all filenames had a large integer, suspected these are epochs,
-this script finds all filenames, reformats the epoch to human date, saves them to dates_string.txt
-Additionally, has a method that returns the filenames of the files in the first 31 days.
+The code below is very simple and should be self-explanatory.
+```
+df = pd.read_csv('ALL_CONVERSATIONS_WRANGLED.csv')
+```
 
-## dates_string.txt
-(Lourens) Result from dates_string.py
+### accessing the tweet_ids and user_ids
+The tweet_ids and user_ids are in a string format but can be converted to a list using the built-in eval() function in Python. Example:
+```
+# ----------- Get all tweet ids of a conversation ----
+sample_conv_tweet_ids = eval(df['tweet_ids'][0])
+# sample_conv_tweet_ids is now a list of all tweet ids for one conversation (the first)
 
-## unpacking_and_loading.py
-Useful functions for extracting zip files and for loading JSON files.
-The load functions will store the JSON file as a Python Generator.
+# ----------- Get all user ids of a conversation ----
+sample_conv_user_ids = eval(df['user_ids'][0])
+# sample_conv_user_ids is now a list of all user ids for one conversation (the first)
+```
+
+### Column description
+- conversation_id: We will use this to specify which conversation we are talking about.
+- raw_tweets_info: Just there for reference. Not useful to use for analysis.
+- conversation_length: The amount of tweets that are in the conversation.
+- tweet_ids: a list of tweet ids ('id_str in the database) of the conversation.
+- user_ids: A list of all the user ids ("('user', 'id_str')" in the database) that are involved in the conversation.
+- airlines_involved: Shows which airlines are involved in the conversation.
