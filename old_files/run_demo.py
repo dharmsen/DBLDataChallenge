@@ -1,5 +1,5 @@
 # Standard dependencies
-import pickle
+#import pickle
 import numpy as np
 import pandas as pd
 
@@ -13,6 +13,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import xgboost as xgb
 from xgboost import XGBClassifier
 from keras.models import load_model
+
+from DBL1_repo.demo.plotter import Plotter
 
 
 class SentimentDemo:
@@ -64,7 +66,7 @@ class SentimentDemo:
         Returns a sparse matrix
         '''
         _ = self.vectorizer.fit_transform(np.load('vector.npy'))
-        return self.vectorizer.transform([sentence])
+        return self.vectorizer.transform(sentence)
 
     def predict(self, X):
         '''

@@ -53,7 +53,7 @@ class DataExtractor:
         excluding the ones with KeyErrors and JSONDecodeErrors
         """
         content = self.add_content()
-        return pd.DataFrame(content, columns=self.features).to_csv('data.csv')
+        return pd.DataFrame(content, columns=self.features).to_csv('extracted_data.csv')
 
 
 if __name__ == '__main__':
