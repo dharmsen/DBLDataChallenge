@@ -1,0 +1,31 @@
+import os
+from zipfile import ZipFile
+
+
+class Unzipper:
+    def __init__(self, directory):
+        self.dir = directory
+
+    @staticmethod
+    def unzip(file):
+        """
+        Unzip file and save unzipped file in a directory 'unzipped'
+        """
+        with ZipFile(file, 'r') as f:
+            f.extractall('demo/unzipped')
+
+    def unzip_all(self):
+        """
+        Unzips all files in a given directory
+        Saves unzipped files in a directory 'unzipped'
+        """
+        for file in os.listdir(self.dir):
+            print(file)
+            self.unzip(f'{self.dir}/{file}')
+
+
+if __name__ == '__main__':
+    pass
+    # For testing
+    # zipper = Unzipper(os.path.abspath('demo/zipped_data'))
+    # zipper.unzip_all()
