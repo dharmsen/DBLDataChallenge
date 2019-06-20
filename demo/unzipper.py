@@ -12,20 +12,22 @@ class Unzipper:
         """
         Unzip file and save unzipped file in a directory called 'unzipped'
         """
-        with ZipFile(file, 'r') as f:
-            f.extractall('demo/unzipped')
+        if file.endswith('.zip'):
+            print(f'Unzipping: {file}')
+            with ZipFile(file, 'r') as f:
+                f.extractall('unzipped')
+        else:
+            print(f'Skipping: {file}')
 
     def unzip_all(self):
         """
         Unzips all files in the given directory
         """
         for file in os.listdir(self.dir):
-            print(f'Unzipping: {file}')
             self.unzip(f'{self.dir}/{file}')
 
 
 if __name__ == '__main__':
-    pass
     # For testing
-    # zipper = Unzipper(os.path.abspath('demo/zipped_data'))
-    # zipper.unzip_all()
+    zipper = Unzipper(os.path.abspath('demo/zipped_data'))
+    zipper.unzip_all()

@@ -53,9 +53,11 @@ class DataExtractor:
         excluding the ones with KeyErrors and JSONDecodeErrors
         """
         content = self.add_content()
-        return pd.DataFrame(content, columns=self.features).to_csv('extracted_data.csv')
+        return pd.DataFrame(content, columns=self.features).to_csv('extracted_data.csv', index=False)
 
 
 if __name__ == '__main__':
-    extractor = DataExtractor(directory='unzipped/', features=['id_str', 'text', 'created_at', ('user', 'id_str')])
-    extractor.make_csv()
+    pass
+    # For testing
+    # extractor = DataExtractor(directory='unzipped/', features=['id_str', 'text', 'created_at', ('user', 'id_str')])
+    # extractor.make_csv()
