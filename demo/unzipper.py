@@ -12,12 +12,10 @@ class Unzipper:
         """
         Unzip file and save unzipped file in a directory called 'unzipped'
         """
-        if file.endswith('.zip'):
+        if not file.endswith('.DS_Store'):
             print(f'Unzipping: {file}')
             with ZipFile(file, 'r') as f:
                 f.extractall('unzipped')
-        else:
-            print(f'Skipping: {file}')
 
     def unzip_all(self):
         """
@@ -28,6 +26,7 @@ class Unzipper:
 
 
 if __name__ == '__main__':
+    # pass
     # For testing
-    zipper = Unzipper(os.path.abspath('demo/zipped_data'))
+    zipper = Unzipper(os.path.abspath('zipped_data'))
     zipper.unzip_all()

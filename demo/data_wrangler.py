@@ -132,7 +132,7 @@ class DataWrangler:
 
 
 if __name__ == '__main__':
-    pass
+    # pass
     # For testing
-    # wrangler = DataWrangler('extracted_data.csv')
-    # wrangler.full_wrangle()
+    wrangler = DataWrangler('extracted_data.csv')
+    wrangler.full_wrangle()
