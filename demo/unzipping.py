@@ -4,23 +4,23 @@ from zipfile import ZipFile
 
 class Unzipper:
     def __init__(self, directory):
+        # The directory from where to retrieve the files
         self.dir = directory
 
     @staticmethod
     def unzip(file):
         """
-        Unzip file and save unzipped file in a directory 'unzipped'
+        Unzip file and save unzipped file in a directory called 'unzipped'
         """
         with ZipFile(file, 'r') as f:
             f.extractall('demo/unzipped')
 
     def unzip_all(self):
         """
-        Unzips all files in a given directory
-        Saves unzipped files in a directory 'unzipped'
+        Unzips all files in the given directory
         """
         for file in os.listdir(self.dir):
-            print(file)
+            print(f'Unzipping: {file}')
             self.unzip(f'{self.dir}/{file}')
 
 

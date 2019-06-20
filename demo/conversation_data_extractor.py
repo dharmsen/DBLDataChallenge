@@ -5,7 +5,7 @@ import pandas as pd
 
 class DataExtractor:
     """
-    Converts multiple JSON files to a DataFrame with
+    Converts multiple JSON files to a CSV with
     specified features
     """
     def __init__(self, directory, features):
@@ -47,27 +47,15 @@ class DataExtractor:
                 print(f'--KeyError at line: [{i}]--')
         return rows
 
-    def make_dataframe(self):
-        """
-        Combines the features and content into a DataFrame
-        """
-        content = self.add_content()
-        return pd.DataFrame(content, columns=self.features)
-
     def make_csv(self):
         """
-        Makes a csv file of all data in the given directory
+        Creates a csv file of all data
         excluding the ones with KeyErrors and JSONDecodeErrors
         """
-        return self.make_dataframe().to_csv('data.csv')
+        content = self.add_content()
+        return pd.DataFrame(content, columns=self.features).to_csv('data.csv')
 
 
 if __name__ == '__main__':
-    conversation_features = ['id_str', 'text',
-                             'lang', 'created_at',
-                             'in_reply_to_status_id_str',
-                             'in_reply_to_user_id_str',
-                             'in_reply_to_screen_name',
-                             ('user', 'id_str')]
-    extractor = DataExtractor(directory='unzipped/', features=conversation_features)
-    dataframe = extractor.make_csv()
+    extractor = DataExtractor(directory='unzipped/', features=['id_str', 'text', 'created_at', ('user', 'id_str')])
+    extractor.make_csv()
